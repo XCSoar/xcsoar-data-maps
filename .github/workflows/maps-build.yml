@@ -1,0 +1,13 @@
+---
+on: 
+  push:
+
+
+jobs:
+  createmaps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull docker image
+        run: docker pull ghcr.io/xcsoar/mapgen-worker
+      - name: run mapgen-worker and produce maps
+        run: docker --mount $PWD=/opt/mapgen/data/ run ghcr.io/xcsoar/mapgen-worker  /opt/mapgen/bin/generate-maps
