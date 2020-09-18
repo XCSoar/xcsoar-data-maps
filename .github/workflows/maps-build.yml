@@ -10,4 +10,4 @@ jobs:
       - name: pull docker image
         run: docker pull ghcr.io/xcsoar/mapgen-worker
       - name: run mapgen-worker and produce maps
-        run: docker run --mount $PWD=/opt/mapgen/data/ ghcr.io/xcsoar/mapgen-worker /opt/mapgen/bin/generate-maps
+        run: docker run --mount $PWD,/opt/mapgen/data/ ghcr.io/xcsoar/mapgen-worker /opt/mapgen/bin/generate-maps
