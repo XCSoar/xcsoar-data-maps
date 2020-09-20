@@ -1,7 +1,8 @@
 ---
 on: 
+  schedule:
+    - cron: "23 42 * * 5"
   push:
-
 
 jobs:
   createmaps:
@@ -11,3 +12,12 @@ jobs:
         run: docker pull ghcr.io/xcsoar/mapgen-worker
       - name: run mapgen-worker and produce maps
         run: docker run --mount type=bind,source="$(pwd)",target=/opt/mapgen/data ghcr.io/xcsoar/mapgen-worker /opt/mapgen/bin/generate-maps
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.DEPLOY_KEY }}
+          known_hosts: 'ffoooooooobar' 
+      - name: add sshkey of deployhost to known_hosts
+        run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST}} > ~/.ssh/known_hosts 
+      - name: copy maps to deployment directory
+        run: scp -P ${{ secrets.DEPLOY_PORT }} *.xcm ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/maps-test
