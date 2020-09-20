@@ -1,7 +1,7 @@
 ---
 on: 
   schedule:
-    - cron: "23 42 * * 5"
+    - cron: '23 42 * * 5'
   push:
 
 jobs:
