@@ -19,5 +19,5 @@ jobs:
           known_hosts: 'ffoooooooobar' 
       - name: add sshkey of deployhost to known_hosts
         run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST}} > ~/.ssh/known_hosts 
-      - name: copy maps to deployment directory
-        run: scp -P ${{ secrets.DEPLOY_PORT }} *.xcm ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/maps-test
+      - name: sync maps and config to deployment directory
+        run: rsync -e ssh -aptv --delete data/maps.config.js *.xcm ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/maps-test
