@@ -28,8 +28,8 @@ jobs:
       - name: add sshkey of deployhost to known_hosts
         run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST}} > ~/.ssh/known_hosts 
 
-      - name: deploy maps.config.js to xcsoar download repo
-        run: scp -P ${{ secrets.REPO_PORT }} ./data/maps.config.js ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/
+      - name: deploy maps.config.js to xcsoar's mapgen repo
+        run: scp -P ${{ secrets.REPO_PORT }} ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/
 
       - name: pull docker image
         run: docker pull ghcr.io/xcsoar/mapgen-worker
