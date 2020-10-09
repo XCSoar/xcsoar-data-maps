@@ -29,7 +29,7 @@ jobs:
         run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST}} > ~/.ssh/known_hosts 
 
       - name: deploy maps.config.js to xcsoar download repo
-        run: rsync -e "ssh -p ${{ secrets.REPO_PORT }}" -aptv ./data/maps.config.js ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/
+        run: rsync -e 'ssh -p ${{ secrets.REPO_PORT }}' -arvz ./data/maps.config.js ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/
 
       - name: pull docker image
         run: docker pull ghcr.io/xcsoar/mapgen-worker
@@ -38,4 +38,4 @@ jobs:
         run: docker run --mount type=bind,source="$(pwd)",target=/opt/mapgen/data -w /opt/mapgen/data ghcr.io/xcsoar/mapgen-worker /opt/mapgen/bin/generate-maps
 
       - name: sync maps and config to deployment directory
-        run: rsync -e ssh -aptv --delete ../data/maps.config.js *.xcm ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/maps-test
+        run: rsync -e ssh -arzv --delete ../data/maps.config.js *.xcm ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/maps-test
