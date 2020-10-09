@@ -14,8 +14,7 @@ jobs:
 
       - name: ssh-agent with keys for REPO and DEPLOY hosts
         uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: | 
+        with: ssh-private-key: | 
             ${{ secrets.REPO_KEY }}
             ${{ secrets.DEPLOY_KEY }}
 
@@ -29,7 +28,7 @@ jobs:
         run: scp -P ${{ secrets.REPO_PORT }} ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/checksums .
 
       - name: update checksums of maps.config.js
-        run: cd data && $HOME/bin/replacechecksums maps.config.js
+        run: cd data && $GITHUB_WORKSPACE/bin/replacechecksums maps.config.js
 
       - name: deploy maps.config.js and checksums to xcsoar's mapgen repo
         run: scp -P ${{ secrets.REPO_PORT }} checksums ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/
