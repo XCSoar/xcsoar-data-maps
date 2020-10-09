@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# exit on errors
+set -e
+
+# Replaces checksum of specified file in checksums on destination repo
+FILE="$1"
+CHKSUM=$(sha256sum $1 | cut -f1 -d" ")
+CHKSUMFILE=$HOME/checksums
+sed "s/.*  $FILE/$CHKSUM  $FILE/" -i $CHKSUMFILE
