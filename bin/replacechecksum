@@ -5,6 +5,6 @@ set -e
 
 # Replaces checksum of specified file in checksums on destination repo
 FILE="$1"
-CHKSUM=$(sha256sum $1 | cut -f1 -d" ")
+CHKSUM=$(md5sum $1 | cut -f1 -d" ")
 CHKSUMFILE="$2"
 sed "s/.*  $FILE/$CHKSUM  $FILE/" -i $CHKSUMFILE
