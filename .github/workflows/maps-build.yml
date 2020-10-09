@@ -22,20 +22,20 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
-      - name: add sshkey of deployhost to known_hosts
-        run: ssh-keyscan -p ${{ secrets.REPO_PORT }} ${{ secrets.REPO_HOST}} > ~/.ssh/known_hosts 
+      - name: add sshkey of xcsoar's mapgen repository to known_hosts
+        run: ssh-keyscan -p ${{ secrets.REPO_PORT }} ${{ secrets.REPO_HOST }} > ~/.ssh/known_hosts 
 
-      - name: add sshkey of deployhost to known_hosts
-        run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST}} > ~/.ssh/known_hosts 
+      - name: add sshkey of download host to known_hosts
+        run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST }} > ~/.ssh/known_hosts 
 
       - name: deploy maps.config.js to xcsoar's mapgen repo
-        run: scp -P ${{ secrets.REPO_PORT }} ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/
+        run: scp ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PORT }}/${{ secrets.REPO_PATH }}/
 
       - name: pull docker image
         run: docker pull ghcr.io/xcsoar/mapgen-worker
 
       - name: run mapgen-worker and produce maps
-        run: docker run --mount type=bind,source="$(pwd)",target=/opt/mapgen/data -w /opt/mapgen/data ghcr.io/xcsoar/mapgen-worker /opt/mapgen/bin/generate-maps
+        run: docker run --mount type=bind,source="$(pwd)/data",target=/opt/mapgen/data -w /opt/mapgen/data ghcr.io/xcsoar/mapgen-worker /opt/mapgen/bin/generate-maps
 
       - name: sync maps and config to deployment directory
-        run: rsync -e ssh -arzv --delete ../data/maps.config.js *.xcm ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/maps-test
+        run: rsync -e ssh -arzv --delete ./data/maps.config.js *.xcm ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/maps-test
