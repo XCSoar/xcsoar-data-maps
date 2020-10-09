@@ -24,14 +24,15 @@ jobs:
 
       - name: add sshkey of download host to known_hosts
         run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts 
-      - name: deploy maps.config.js to xcsoar's mapgen repo
-        run: scp -P ${{ secrets.REPO_PORT }} ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/checksums .
 
-      - name: deploy maps.config.js to xcsoar's mapgen repo
-        run: scp -P ${{ secrets.REPO_PORT }} ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/maps.config.js
+      - name: copy checksums file from xcsoar's mapgen repo
+        run: scp -P ${{ secrets.REPO_PORT }} ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/checksums .
 
       - name: update checksums of maps.config.js
         run: cd data && $HOME/bin/replacechecksums maps.config.js
+
+      - name: deploy maps.config.js and checksums to xcsoar's mapgen repo
+        run: scp -P ${{ secrets.REPO_PORT }} checksums ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/
 
       - name: pull docker image
         run: docker pull ghcr.io/xcsoar/mapgen-worker
