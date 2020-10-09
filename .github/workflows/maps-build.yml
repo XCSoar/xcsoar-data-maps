@@ -12,17 +12,15 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v2
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
+      - name: ssh-agent with key for REPO
+        uses: webfactory/ssh-agent@v0.4.1
         with:
-          key: ${{ secrets.REPO_KEY }}
-          known_hosts: 'ffoooooooobar' 
+          ssh-private-key: ${{ secrets.REPO_KEY }}
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
+      - name: ssh-agent with key for DEPLOY
+        uses: webfactory/ssh-agent@v0.4.1
         with:
-          key: ${{ secrets.DEPLOY_KEY }}
-          known_hosts: 'ffoooooooobar' 
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
       - name: add sshkey of deployhost to known_hosts
         run: ssh-keyscan -p ${{ secrets.DATA_PORT }} ${{ secrets.DATA_HOST}} > ~/.ssh/known_hosts 
