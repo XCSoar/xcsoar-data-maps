@@ -14,7 +14,8 @@ jobs:
 
       - name: ssh-agent with keys for REPO and DEPLOY hosts
         uses: webfactory/ssh-agent@v0.4.1
-          with: ssh-private-key: |
+        with:
+          ssh-private-key: |
             ${{ secrets.REPO_KEY }}
             ${{ secrets.DEPLOY_KEY }}
 
