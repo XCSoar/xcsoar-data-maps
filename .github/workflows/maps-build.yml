@@ -29,7 +29,7 @@ jobs:
         run: scp -P ${{ secrets.REPO_PORT }} ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/checksums .
 
       - name: update checksums of maps.config.js
-        run: cd data && $GITHUB_WORKSPACE/bin/replacechecksums maps.config.js $GITHUB_WORKSPACE/checksums
+        run: cd data && $GITHUB_WORKSPACE/bin/replacechecksum maps.config.js $GITHUB_WORKSPACE/checksums
 
       - name: deploy maps.config.js and checksums to xcsoar's mapgen repo
         run: scp -P ${{ secrets.REPO_PORT }} checksums ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/
