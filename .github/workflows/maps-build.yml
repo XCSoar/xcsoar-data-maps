@@ -29,6 +29,9 @@ jobs:
         run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST }} > ~/.ssh/known_hosts 
 
       - name: deploy maps.config.js to xcsoar's mapgen repo
+        run: echo scp ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PORT }}/${{ secrets.REPO_PATH }}/
+
+      - name: deploy maps.config.js to xcsoar's mapgen repo
         run: scp ./data/maps.config.js ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PORT }}/${{ secrets.REPO_PATH }}/
 
       - name: pull docker image
