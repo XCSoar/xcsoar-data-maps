@@ -1,5 +1,6 @@
 XCSoar Map Repository
 =====================
+![.github/workflows/maps-build.yml](https://github.com/XCSoar/xcsoar-data-maps/workflows/.github/workflows/maps-build.yml/badge.svg)
 
 ## Purpose
 This repo maintains the source data for the maps in the official XCSoar data repository. 
