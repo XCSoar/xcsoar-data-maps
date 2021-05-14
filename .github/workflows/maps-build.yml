@@ -20,6 +20,9 @@ jobs:
             ${{ secrets.REPO_KEY }}
             ${{ secrets.DEPLOY_KEY }}
 
+      - name: generate ssh dir
+        run: mkdir -p ~/.ssh && chmod 0700 ~/.ssh
+        
       - name: add sshkey of xcsoar's mapgen repository to known_hosts
         run: ssh-keyscan -p ${{ secrets.REPO_PORT }} ${{ secrets.REPO_HOST }} >> ~/.ssh/known_hosts 
 
