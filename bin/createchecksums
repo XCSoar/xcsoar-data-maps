@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -z "${1}" ]; then
+  echo "Usage: $0 <directory> 
+$0 creates sha256 checksums for files in a directory."
+  exit 1
+fi
+
+FILES=$(find "${1}" -type f | grep -v -E '.sha256$')
+
+for each in ${FILES}
+  do 
+     sha256sum "${1}/${each}" > "${1}/${each}".sha256
+done
