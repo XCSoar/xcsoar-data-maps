@@ -10,5 +10,5 @@ FILES=$(find "${1}" -type f | grep -v -E '.sha256$')
 
 for each in ${FILES}
   do 
-     sha256sum "${1}/${each}" > "${1}/${each}".sha256
+     sha256sum "${each}" > "${each}".sha256
 done
