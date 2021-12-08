@@ -42,7 +42,7 @@ jobs:
         run: docker pull ghcr.io/xcsoar/mapgen-worker
 
       - name: run mapgen-worker and produce maps
-        run: docker run -u $(id -u ${USER}):$(id -g ${USER}) --mount type=bind,source="$(pwd)/data",target=/opt/mapgen/data -w /opt/mapgen/data ghcr.io/xcsoar/mapgen-worker /opt/mapgen/bin/generate-maps
+        run: docker run -u $(id -u ${USER}):$(id -g ${USER}) --mount type=bind,source="$(pwd)/data",target=/opt/mapgen/data --entrypoint /opt/mapgen/bin/generate-maps -w /opt/mapgen/data ghcr.io/xcsoar/mapgen-worker
 
       - name: generate checksum files
         run: ${GITHUB_WORKSPACE}/bin/createchecksums ./data/
