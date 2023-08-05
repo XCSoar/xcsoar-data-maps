@@ -31,7 +31,7 @@
 		"layer":     "HydroLAKES_polys_v10",
 		"label":     "Lake_name",
 		"range":     100,
-		"color":     "85,160,255"
+		"color":     "98,157,251"
 	    },
 	    {
 		"name":      "water_line",
@@ -41,7 +41,7 @@
 		"label":     "nam",
 		"where":     "hyc=8",
 		"range":     50,
-		"color":     "85,160,255"
+		"color":     "98,157,251"
 	    },
 	    {
 		"name":      "roadbig_line",
