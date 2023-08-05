@@ -49,7 +49,7 @@
 		"dataset":   "osm",
 		"layer":     "roadbig_line",
 		"range":     15,
-		"color":     "240,64,64",
+		"color":     "218,109,130",
 		"pen_width": 3
 	    },
 	    {
@@ -58,7 +58,7 @@
 		"dataset":   "osm",
 		"layer":     "roadmedium_line",
 		"range":     8,
-		"color":     "240,64,64",
+		"color":     "229,156,44",
 		"pen_width": 2
 	    },
 	    {
@@ -67,7 +67,7 @@
 		"dataset":   "osm",
 		"layer":     "roadsmall_line",
 		"range":     3,
-		"color":     "240,64,64"
+		"color":     "195,195,190"
 	    },
 	    {
 		"name":      "railway_line",
