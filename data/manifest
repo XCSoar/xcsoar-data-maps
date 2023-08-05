@@ -1,0 +1,121 @@
+{
+    "topology": {
+	"datasets": {
+	    "vmap0": [
+		{ "name": "vmap0/eur", "bounds": [ -35, 180, 90,  30] },
+		{ "name": "vmap0/noa", "bounds": [-180,   0, 90, -40] },
+		{ "name": "vmap0/sas", "bounds": [  25, 180, 50, -60] },
+		{ "name": "vmap0/soa", "bounds": [-180, 180, 30, -90] }
+	    ],
+	    "osm": [
+		{ "name": "osm/planet", "bounds": [-180, 180, 90, -90] }
+	    ],
+	    "hydrolakes": [
+		{ "name": "hydrolakes/HydroLAKES_polys_v10_shp", "bounds": [-180, 180, 90, -90] }
+	    ]
+	},
+	"layers": [
+	    {
+		"name":      "city_area",
+		"level_of_detail": 1,
+		"dataset":   "vmap0",
+		"layer":     "pop-built-up-a",
+		"range":     50,
+		"color":     "223,223,0"
+
+	    },
+	    {
+		"name":      "water_area",
+		"level_of_detail": 1,
+		"dataset":   "hydrolakes",
+		"layer":     "HydroLAKES_polys_v10",
+		"label":     "Lake_name",
+		"range":     100,
+		"color":     "85,160,255"
+	    },
+	    {
+		"name":      "water_line",
+		"level_of_detail": 1,
+		"dataset":   "vmap0",
+		"layer":     "hydro-water-course-l",
+		"label":     "nam",
+		"where":     "hyc=8",
+		"range":     50,
+		"color":     "85,160,255"
+	    },
+	    {
+		"name":      "roadbig_line",
+		"level_of_detail": 1,
+		"dataset":   "osm",
+		"layer":     "roadbig_line",
+		"range":     15,
+		"color":     "240,64,64",
+		"pen_width": 3
+	    },
+	    {
+		"name":      "roadmedium_line",
+		"level_of_detail": 2,
+		"dataset":   "osm",
+		"layer":     "roadmedium_line",
+		"range":     8,
+		"color":     "240,64,64",
+		"pen_width": 2
+	    },
+	    {
+		"name":      "roadsmall_line",
+		"level_of_detail": 3,
+		"dataset":   "osm",
+		"layer":     "roadsmall_line",
+		"range":     3,
+		"color":     "240,64,64"
+	    },
+	    {
+		"name":      "railway_line",
+		"level_of_detail": 2,
+		"dataset":   "vmap0",
+		"layer":     "trans-railroad-l",
+		"where":     "exs=28",
+		"range":     10,
+		"color":     "64,64,64"
+	    },
+	    {
+		"name":      "city_point",
+		"level_of_detail": 1,
+		"dataset":   "osm",
+		"layer":     "city_point",
+		"label":     "name",
+		"range":     15,
+		"label_important_range": 10,
+		"color":     "223,223,0"
+	    },
+	    {
+		"name":      "town_point",
+		"level_of_detail": 1,
+		"dataset":   "osm",
+		"layer":     "town_point",
+		"label":     "name",
+		"range":     10,
+		"label_important_range": 3,
+		"color":     "223,223,0"
+	    },
+	    {
+		"name":      "suburb_point",
+		"level_of_detail": 2,
+		"dataset":   "osm",
+		"layer":     "suburb_point",
+		"label":     "name",
+		"range":     3,
+		"color":     "223,223,0"
+	    },
+	    {
+		"name":      "village_point",
+		"level_of_detail": 3,
+		"dataset":   "osm",
+		"layer":     "village_point",
+		"label":     "name",
+		"range":     3,
+		"color":     "223,223,0"
+	    }
+	]
+    }
+}
