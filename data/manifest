@@ -121,7 +121,7 @@
 		"level_of_detail": 1,
 		"dataset":   "osm",
 		"layer":     "airstrip_area",
-		"label":     "ref",
+		"label_index":     3,
     "label_range": 30,
 		"label_important_range": 15,
 		"range":     100,
