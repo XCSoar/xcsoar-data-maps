@@ -121,10 +121,10 @@
 		"level_of_detail": 1,
 		"dataset":   "osm",
 		"layer":     "airstrip_area",
-		"label_index":     3,
-    "label_range": 30,
-		"label_important_range": 15,
-		"range":     100,
+		"label":     "ref",
+    "label_range": 1,
+		"label_important_range": 1,
+		"range":     10,
 		"color":     "187,187,204"
 	    }
 	]
