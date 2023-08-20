@@ -30,7 +30,7 @@ jobs:
         run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts 
 
       - name: copy checksums file from xcsoar's mapgen repo
-        run: scp -P ${{ secrets.REPO_PORT }} ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/checksums .
+        run: scp -P ${{ secrets.REPO_PORT }} ${{ secrets.REPO_USER }}@${{ secrets.REPO_HOST }}:${{ secrets.REPO_PATH }}/checksums $GITHUB_WORKSPACE/checksums
 
       - name: update checksums of maps.config.js
         run: cd data && $GITHUB_WORKSPACE/bin/replacechecksum maps.config.js $GITHUB_WORKSPACE/checksums
