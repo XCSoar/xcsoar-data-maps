@@ -11,7 +11,7 @@ jobs:
     steps:
 
       - name: checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ssh-agent with keys for REPO and DEPLOY hosts
         uses: webfactory/ssh-agent@v0.8.0
